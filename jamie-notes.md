@@ -55,3 +55,13 @@ Test API endpoints.
 
 http://localhost:8080/api/poi/ to load from DB
 http://localhost:8080/api/poi/healthcheck to check container
+
+# Task 2
+`kubectl create secret generic test1 --from-literal=username=jamie --from-literal=password=jamie123`
+
+# Task 2 Links
+https://docs.microsoft.com/en-us/azure/key-vault/general/key-vault-integrate-kubernetes
+https://github.com/Azure/secrets-store-csi-driver-provider-azure
+https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/
+https://kubernetes.io/docs/concepts/configuration/secret/
+https://kubernetes.io/docs/concepts/configuration/secret/#use-case-pods-with-prod-test-credentials

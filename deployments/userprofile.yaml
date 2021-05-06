@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userprofile
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: userprofile
+  template:
+    metadata:
+      labels:
+        app: userprofile
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: userprofile
+        image: registryzjk6277.azurecr.io/tripinsights/userprofile:1.0
+        env:
+        - name: SQL_SERVER
+          value: "sqlserverzjk6277.database.windows.net"
+        - name: SQL_DBNAME
+          value: "mydrivingDB"
+        - name: SQL_USER
+          value: "sqladminzJk6277"
+        - name: SQL_PASSWORD
+          value: "*"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: SQL_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: "secrets"
+              key: SQL_PASSWORD
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 6380
+          name: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: userprofile
+spec:
+  ports:
+  - port: 6380
+  selector:
+    app: userprofile
