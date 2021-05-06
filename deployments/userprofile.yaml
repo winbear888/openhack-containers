@@ -18,16 +18,14 @@ spec:
       - name: userprofile
         image: registryzjk6277.azurecr.io/tripinsights/userprofile:1.0
         env:
+        - name: CONFIG_FILES_PATH
+          value: /secrets
+        - name: SQL_USER
+          value: "sqladminzJk6277"
         - name: SQL_SERVER
           value: "sqlserverzjk6277.database.windows.net"
         - name: SQL_DBNAME
           value: "mydrivingDB"
-        - name: SQL_USER
-          value: "sqladminzJk6277"
-        - name: SQL_PASSWORD
-          value: "*"
-        - name: ASPNETCORE_ENVIRONMENT
-          value: "Production"
         - name: SQL_PASSWORD
           valueFrom: 
             secretKeyRef:
@@ -41,7 +39,7 @@ spec:
             cpu: 250m
             memory: 256Mi
         ports:
-        - containerPort: 6380
+        - containerPort: 80
           name: redis
 ---
 apiVersion: v1
@@ -50,6 +48,6 @@ metadata:
   name: userprofile
 spec:
   ports:
-  - port: 6380
+  - port: 80
   selector:
     app: userprofile
