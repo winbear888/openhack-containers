@@ -8,7 +8,8 @@ spec:
     matchLabels:
       app: poi-service
   template:
-    metadata:
+ 
+  metadata:
       labels:
         app: poi-service
     spec:
@@ -25,7 +26,10 @@ spec:
         - name: SQL_USER
           value: "sqladminzJk6277"
         - name: SQL_PASSWORD
-          value: "*"
+          valueFrom: 
+            secretKeyRef:
+              name: "secrets"
+              key: SQL_PASSWORD
         - name: ASPNETCORE_ENVIRONMENT
           value: "Production"
         resources:
