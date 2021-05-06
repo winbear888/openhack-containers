@@ -41,7 +41,7 @@ spec:
             cpu: 250m
             memory: 256Mi
         ports:
-        - containerPort: 6379
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -49,6 +49,6 @@ metadata:
   name: trips-service
 spec:
   ports:
-  - port: 6379
+  - port: 80
   selector:
     app: trips-service
