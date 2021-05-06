@@ -1,36 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: userprofile
+  name: trips-service
+  labels:
+    app: trips-service
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: userprofile
+      app: trips-service
   template:
     metadata:
       labels:
-        app: userprofile
+        app: trips-service
     spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
       containers:
-      - name: userprofile
-        image: registryzjk6277.azurecr.io/tripinsights/userprofile:1.0
+      - name: trips-service
+        image: registryzjk6277.azurecr.io/tripinsights/trips:1.0
         env:
-        - name: CONFIG_FILES_PATH
-          value: /secrets
-        - name: SQL_USER
-          value: "sqladminzJk6277"
         - name: SQL_SERVER
           value: "sqlserverzjk6277.database.windows.net"
         - name: SQL_DBNAME
           value: "mydrivingDB"
+        - name: SQL_USER
+          value: "sqladminzJk6277"
         - name: SQL_PASSWORD
           valueFrom: 
             secretKeyRef:
               name: "secrets"
               key: SQL_PASSWORD
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
         resources:
           requests:
             cpu: 100m
@@ -39,14 +41,14 @@ spec:
             cpu: 250m
             memory: 256Mi
         ports:
-        - containerPort: 80
+        - containerPort: 6379
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: userprofile
+  name: trips-service
 spec:
   ports:
-  - port: 80
+  - port: 6379
   selector:
-    app: userprofile
+    app: trips-service

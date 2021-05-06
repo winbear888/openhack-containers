@@ -59,6 +59,18 @@ http://localhost:8080/api/poi/healthcheck to check container
 # Task 2
 `kubectl create secret generic test1 --from-literal=username=jamie --from-literal=password=jamie123`
 
+Apply the deployments.
+Debug errors.
+`kubectl describe pod userprofile-6b9d646cfb-vpd66`
+
+Somehow you have to tell Kubernetes how it can connect to the registry. Essentially it need credentials to download images.
+`az aks check-acr`
+
+`az aks check-acr -g openhack-rg -n openhack-cluster --acr registryzjk6277.azurecr.io`
+
+
+`az aks update -n openhack-cluster -g openhack-rg --attach-acr registryzjk6277`
+
 # Task 2 Links
 https://docs.microsoft.com/en-us/azure/key-vault/general/key-vault-integrate-kubernetes
 https://github.com/Azure/secrets-store-csi-driver-provider-azure
