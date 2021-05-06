@@ -2,21 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: poi-service
+  labels:
+    app: poi-service
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: poi-service
   template:
- 
-  metadata:
+    metadata:
       labels:
         app: poi-service
     spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
       containers:
-      - name: poi
+      - name: poi-service
         image: registryzjk6277.azurecr.io/tripinsights/poi:1.0
         env:
         - name: SQL_SERVER
