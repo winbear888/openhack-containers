@@ -8,10 +8,9 @@ spec:
     matchLabels:
       app: tripviewer-service
   template:
- 
-  metadata:
-      labels:
-        app: tripviewer-service
+    metadata:
+        labels:
+          app: tripviewer-service
     spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
