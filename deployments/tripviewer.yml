@@ -20,6 +20,10 @@ spec:
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Production"
+        - name: USERPROFILE_API_ENDPOINT
+          value: "http://userprofile:80"
+        - name: TRIPS_API_ENDPOINT
+          value: "http://trips-service:80"
         resources:
           requests:
             cpu: 100m
