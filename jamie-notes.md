@@ -71,6 +71,18 @@ Somehow you have to tell Kubernetes how it can connect to the registry. Essentia
 
 `az aks update -n openhack-cluster -g openhack-rg --attach-acr registryzjk6277`
 
+Get into container
+`kubectl exec --stdin --tty userprofile-6b9d646cfb-82dh9 -- /bin/sh`
+
+Alternatively forward port to localhost:80
+`kubectl port-forward userprofile-6b9d646cfb-82dh9 80`
+
+webapp needs to be a "Loadbalancer" type.
+
+All the ports must be 80 for it to work. Reasons not entirely clear why.
+
+Can now access the external IP directly. Internal IP only works from inside the cluster.
+
 # Task 2 Links
 https://docs.microsoft.com/en-us/azure/key-vault/general/key-vault-integrate-kubernetes
 https://github.com/Azure/secrets-store-csi-driver-provider-azure
