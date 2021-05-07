@@ -45,3 +45,18 @@ spec:
   - port: 80
   selector:
     app: tripviewer-service
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: tripviewer-ingress
+  annotations:
+   kubernetes.io/ingress.class: "nginx"
+spec:
+   rules:
+   - http:
+      paths:
+      - path: /
+        backend:
+         serviceName: tripviewer-service
+         servicePort: 80
