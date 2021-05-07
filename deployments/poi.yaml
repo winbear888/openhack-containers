@@ -65,6 +65,11 @@ spec:
   - http:
       paths: 
       - path: /api/poi
+        pathType: Prefix
+        backend:
+         serviceName: poi-service
+         servicePort: 80
+      - path: /api/docs/poi
         backend:
          serviceName: poi-service
          servicePort: 80
