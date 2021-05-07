@@ -53,3 +53,18 @@ spec:
   - port: 80
   selector:
     app: poi-service
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: poi-ingress
+  annotations:
+   kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - http:
+      paths: 
+      - path: /api/poi
+        backend:
+         serviceName: poi-service
+         servicePort: 80
