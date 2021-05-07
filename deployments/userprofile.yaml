@@ -66,3 +66,11 @@ spec:
         backend:
          serviceName: userprofile
          servicePort: 80
+      - path: /api/user/*
+        backend:
+         serviceName: userprofile
+         servicePort: 80
+      - path: /api/docs/user
+        backend:
+         serviceName: userprofile
+         servicePort: 80
