@@ -53,3 +53,18 @@ spec:
   - port: 80
   selector:
     app: user-java-service
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: user-java-ingress
+  annotations:
+   kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - http:
+      paths: 
+      - path: /api/user-java
+        backend:
+         serviceName: user-java-service
+         servicePort: 80
